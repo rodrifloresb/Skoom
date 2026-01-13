@@ -1,4 +1,4 @@
-#!/home/carolina-yut/Skoom/Backend/.venv/bin/python3
+#!/home/rodrigo/Skoom/Backend/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

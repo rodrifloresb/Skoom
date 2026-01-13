@@ -9,12 +9,23 @@ Dependecias :
 
 Crear entorno : 
 
+
 `Backend: ~$ python3 -m venv .venv`
 
 `source .venv/bin/activate`
 
 `pip install -r requirements.txt`
 
+o make venv , make install.
+
 Ejecucion del servidor :
 
-`fastapi dev main.py`
+`fastapi dev main.py` o make run
+
+
+DB :
+
+db-up: crear base
+db-down: apagar db
+db-logs: ver logs
+db-shell: Entrar a la base

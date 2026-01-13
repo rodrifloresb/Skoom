@@ -10,7 +10,7 @@ install: venv
 
 
 run:
-	$(VENV)/bin/fastapi dev main.py
+	$(VENV)/bin/fastapi dev src/main.py
 
 
 clean:

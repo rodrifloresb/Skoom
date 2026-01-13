@@ -20,7 +20,7 @@ o make venv , make install.
 
 Ejecucion del servidor :
 
-`fastapi dev main.py` o make run
+`fastapi dev src/main.py` o make run
 
 
 DB :

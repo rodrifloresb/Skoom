@@ -1,7 +1,10 @@
 from fastapi import FastAPI
+from routes.user_routes import router as user_router
 
 app = FastAPI()
 
+app.include_router(user_router, prefix="/users", tags=["Users"])
+
 @app.get("/")
-async def root():
-    return {"message": "Skoom!"}
+def health():
+    return {"status": "ok"}

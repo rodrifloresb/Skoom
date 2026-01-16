@@ -1,8 +1,29 @@
-Backend/src/__pycache__/main.cpython-313.pyc
-Backend/.venv
-Backend/src/config/__pycache__/__init__.cpython-313.pyc
-.gitignore
-Backend/src/routes/__pycache__/__init__.cpython-313.pyc
-Backend/src/routes/__pycache__/user_routes.cpython-313.pyc
-.gitignore
-Backend/src/config/__pycache__/database.cpython-313.pyc
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Variables de entorno
+#.env
+
+# Docker
+*.log
+
+# IDEs
+.vscode/
+.idea/
+
+# SO
+.DS_Store
+Thumbs.db
+
+# Build
+build/
+dist/
+*.egg-info/

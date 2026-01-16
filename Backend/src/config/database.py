@@ -1,13 +1,13 @@
 import mysql.connector
 
-connection = mysql.connector.connect(
-        user = 'appuser',
-        password = 'apppass',
-        host = 'localhost',
-        port = 3307,
-        database = 'appdb'
-        )
+def get_connection():
 
-Base = connection.cursor()
-
-
+    connection = mysql.connector.connect(
+            user = 'appuser',
+            password = 'apppass',
+            host = 'localhost',
+            port = 3307,
+            database = 'appdb'
+            )
+    
+    return connection

@@ -36,3 +36,25 @@ class Tutor:
         conn.close()
             
         return tutors
+    
+    @staticmethod
+    def create(
+        firstName,
+        lastName,
+        mail,
+        password,
+        phoneNumber,
+        address
+        ):
+        
+        conn = get_connection()
+        base = conn.cursor()
+        
+        base.execute(
+            "INSERT INTO tutors (firstName, lastName, mail, password, phoneNumber, address) VALUES (%s, %s, %s, %s, %s, %s)",
+            (firstName, lastName, mail, password, phoneNumber, address)
+        )
+        
+        conn.commit()
+        base.close()
+        conn.close()

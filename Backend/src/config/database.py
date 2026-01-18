@@ -1,13 +1,17 @@
 import mysql.connector
 
-def get_connection():
+base = None
 
-    connection = mysql.connector.connect(
+def get_connection():
+    global base
+
+    if base : return base
+    
+    base = mysql.connector.connect(
             user = 'appuser',
             password = 'apppass',
             host = 'localhost',
             port = 3307,
             database = 'appdb'
-            )
+        )
     
-    return connection

@@ -17,25 +17,43 @@ class Tutor:
             phoneNumber VARCHAR(20) NOT NULL,
             address VARCHAR(255) NOT NULL,
             logo INT
-        )
+        );
         """)
         
         conn.commit()
         base.close()
-        conn.close()
         
     @staticmethod
     def get_all():
         conn = get_connection()
         base = conn.cursor()
     
-        base.execute("SELECT id, firstName, lastName FROM tutors")
+        base.execute("SELECT id, firstName, lastName FROM tutors;")
         tutors = base.fetchall()
         
         base.close()
-        conn.close()
             
         return tutors
+    
+    @staticmethod
+    def get_by(field: str, value):
+        fields = {"id", "firstName","lastName", "mail", "password", "phoneNumber", "address", "logo"}
+        
+        if field not in fields:
+            raise ValueError("Campo no permitido")
+        
+        conn = get_connection()
+        base = conn.cursor()
+        
+        base.execute(f"SELECT id, firstName, lastName, mail, phoneNumber, address FROM tutors WHERE {field} = %s;"
+                     , (value,))
+        
+        result = base.fetchall()
+        
+        base.close()
+        
+        return result
+        
     
     @staticmethod
     def create(
@@ -51,10 +69,11 @@ class Tutor:
         base = conn.cursor()
         
         base.execute(
-            "INSERT INTO tutors (firstName, lastName, mail, password, phoneNumber, address) VALUES (%s, %s, %s, %s, %s, %s)",
+            """INSERT INTO tutors (firstName, lastName, mail, password, phoneNumber, address) 
+            VALUES (%s, %s, %s, %s, %s, %s);""",
             (firstName, lastName, mail, password, phoneNumber, address)
         )
         
         conn.commit()
         base.close()
-        conn.close()
+        

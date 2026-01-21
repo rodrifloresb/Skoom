@@ -32,3 +32,23 @@ def post_tutor(
                  password=password,
                  phoneNumber=phoneNumber,
                  address=address)
+    
+@router.delete("/{id}")
+def delete_tutor(id: int):
+    
+    result = Tutor.get_by(field="id", value=id)
+    
+    if result == []:
+        raise HTTPException(status_code=404, detail="No existe tutor con este id")
+    
+    Tutor.delete(id=id)
+    
+@router.put("/{id}")
+def tutor_update(id: int, field: str, value):
+    
+    result = Tutor.get_by(field="id", value=id)
+    
+    if result == []:
+        raise HTTPException(status_code=404, detail="No existe tutor con este id")
+    
+    Tutor.update(id=id, field=field, value=value)

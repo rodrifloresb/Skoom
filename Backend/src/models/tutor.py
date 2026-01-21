@@ -1,6 +1,7 @@
 from config.database import get_connection
 
-class Tutor: 
+fields = {"id", "firstName","lastName", "mail", "password", "phoneNumber", "address", "logo"}
+class Tutor:
     
     @staticmethod
     def create_table():
@@ -37,7 +38,8 @@ class Tutor:
     
     @staticmethod
     def get_by(field: str, value):
-        fields = {"id", "firstName","lastName", "mail", "password", "phoneNumber", "address", "logo"}
+        
+        global fields
         
         if field not in fields:
             raise ValueError("Campo no permitido")
@@ -73,6 +75,32 @@ class Tutor:
             VALUES (%s, %s, %s, %s, %s, %s);""",
             (firstName, lastName, mail, password, phoneNumber, address)
         )
+        
+        conn.commit()
+        base.close()
+    
+    @staticmethod
+    def delete(id):
+        conn = get_connection()
+        base = conn.cursor()
+        
+        base.execute("DELETE FROM tutors WHERE id = %s;", (id,))
+        
+        conn.commit()
+        base.close()
+        
+    @staticmethod
+    def update(id, field: str, value):
+        
+        global fields
+                
+        if field not in fields:
+            raise ValueError("Campo no permitido")
+        
+        conn = get_connection()
+        base = conn.cursor()
+        
+        base.execute(f"UPDATE tutors SET {field} = %s WHERE id = %s", (value, id,))
         
         conn.commit()
         base.close()

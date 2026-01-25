@@ -1,5 +1,5 @@
 from config.database import get_connection
-
+fields = {"id", "name", "mail", "password", "phoneNumber", "address", "logo" }
 #aca va el codigo necesario para que interactue con la bd
 
 class Colegio:
@@ -38,7 +38,6 @@ class Colegio:
     
     @staticmethod
     def get_by(field: str, value):
-        fields = {"id", "name", "mail", "password", "phoneNumber", "address", "logo" }
         if field not in fields:
              raise ValueError("Campo no permitido")
         
@@ -66,6 +65,33 @@ class Colegio:
             VALUES (%s, %s, %s, %s, %s);""",
             (name, mail, password, phoneNumber, address)
         )
+        
+        conn.commit()
+        base.close()
+    
+
+    @staticmethod
+    def delete(id):
+        conn = get_connection()
+        base = conn.cursor()
+        
+        base.execute("DELETE FROM colegios WHERE id = %s;", (id,))
+        
+        conn.commit()
+        base.close()
+
+    @staticmethod
+    def update(id, field: str, value):
+        
+        global fields
+                
+        if field not in fields:
+            raise ValueError("Campo no permitido")
+        
+        conn = get_connection()
+        base = conn.cursor()
+        
+        base.execute(f"UPDATE colegios SET {field} = %s WHERE id = %s", (value, id,))
         
         conn.commit()
         base.close()

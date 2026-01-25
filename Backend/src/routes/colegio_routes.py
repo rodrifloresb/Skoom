@@ -32,3 +32,23 @@ def post_colegio(
                  password=password,
                  phoneNumber=phoneNumber,
                  address=address)
+    
+@router.delete("/{id}")
+def delete_colegio(id: int):
+    
+    result = Colegio.get_by(field="id", value=id)
+    
+    if result == []:
+        raise HTTPException(status_code=404, detail="No existe colegio con este id")
+    
+    Colegio.delete(id=id)
+    
+@router.put("/{id}")
+def colegio_update(id: int, field: str, value):
+    
+    result = Colegio.get_by(field="id", value=id)
+    
+    if result == []:
+        raise HTTPException(status_code=404, detail="No existe colegio con este id")
+    
+    Colegio.update(id=id, field=field, value=value)

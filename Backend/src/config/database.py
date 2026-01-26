@@ -1,13 +1,8 @@
 import mysql.connector
 
-base = None
-
 def get_connection():
-    global base
 
-    if base : return base
-    
-    base = mysql.connector.connect(
+    return mysql.connector.connect(
             user = 'appuser',
             password = 'apppass',
             host = 'localhost',

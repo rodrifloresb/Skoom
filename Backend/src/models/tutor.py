@@ -1,14 +1,12 @@
 from config.database import get_connection
+from utils.db_handler import db_handler
 
-fields = {"id", "firstName","lastName", "mail", "password", "phoneNumber", "address", "logo"}
 class Tutor:
     
     @staticmethod
-    def create_table():
-        conn = get_connection()
-        base = conn.cursor()
-        
-        base.execute("""
+    @db_handler
+    def create_table(cursor):
+        cursor.execute("""
         CREATE TABLE IF NOT EXISTS tutors(
             id INT PRIMARY KEY AUTO_INCREMENT,
             firstName VARCHAR(50) NOT NULL,
@@ -21,44 +19,36 @@ class Tutor:
         );
         """)
         
-        conn.commit()
-        base.close()
-        
     @staticmethod
-    def get_all():
-        conn = get_connection()
-        base = conn.cursor()
-    
-        base.execute("SELECT id, firstName, lastName FROM tutors;")
-        tutors = base.fetchall()
-        
-        base.close()
-            
-        return tutors
+    @db_handler
+    def get_all(cursor):
+        cursor.execute("SELECT id, firstName, lastName FROM tutors;")
+        return cursor.fetchall()
+
     
     @staticmethod
-    def get_by(field: str, value):
-        
-        global fields
-        
+    @db_handler
+    def get_by(cursor, field: str, value):
+        fields = {"id", "firstName","lastName", "mail", "phoneNumber", "address"}
+
+
         if field not in fields:
             raise ValueError("Campo no permitido")
-        
-        conn = get_connection()
-        base = conn.cursor()
-        
-        base.execute(f"SELECT id, firstName, lastName, mail, phoneNumber, address FROM tutors WHERE {field} = %s;"
-                     , (value,))
-        
-        result = base.fetchall()
-        
-        base.close()
-        
-        return result
+
+        query = f"""
+            SELECT id, firstName, lastName, mail, phoneNumber, address
+            FROM tutors
+            WHERE {field} = %s;
+        """
+
+        cursor.execute(query, (value,))
+        return cursor.fetchall()
+
         
     
     @staticmethod
-    def create(
+    @db_handler
+    def create(cursor,
         firstName,
         lastName,
         mail,
@@ -66,42 +56,29 @@ class Tutor:
         phoneNumber,
         address
         ):
-        
-        conn = get_connection()
-        base = conn.cursor()
-        
-        base.execute(
+
+        cursor.execute(
             """INSERT INTO tutors (firstName, lastName, mail, password, phoneNumber, address) 
             VALUES (%s, %s, %s, %s, %s, %s);""",
             (firstName, lastName, mail, password, phoneNumber, address)
         )
-        
-        conn.commit()
-        base.close()
     
     @staticmethod
-    def delete(id):
-        conn = get_connection()
-        base = conn.cursor()
-        
-        base.execute("DELETE FROM tutors WHERE id = %s;", (id,))
-        
-        conn.commit()
-        base.close()
+    @db_handler
+    def delete(cursor, id):
+        cursor.execute("DELETE FROM tutors WHERE id = %s;", (id,))
         
     @staticmethod
-    def update(id, field: str, value):
+    @db_handler
+    def update(cursor, id, field: str, value):
         
-        global fields
+        fields = {"firstName","lastName", "mail", "password", "phoneNumber", "address", "logo"}
                 
         if field not in fields:
             raise ValueError("Campo no permitido")
         
-        conn = get_connection()
-        base = conn.cursor()
         
-        base.execute(f"UPDATE tutors SET {field} = %s WHERE id = %s", (value, id,))
-        
-        conn.commit()
-        base.close()
-        
+        cursor.execute(f"UPDATE tutors SET {field} = %s WHERE id = %s", (value, id,))
+
+        if cursor.rowcount == 0:
+            raise ValueError("Tutor no encontrado")

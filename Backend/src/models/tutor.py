@@ -1,4 +1,3 @@
-from config.database import get_connection
 from utils.db_handler import db_handler
 
 class Tutor:

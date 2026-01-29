@@ -18,19 +18,20 @@ class Student:
     @staticmethod
     @db_handler
     def get_all(cursor):
-        cursor.execute("SELECT id, firstName, lastName, tuition FROM students;")
+        cursor.execute("SELECT id, firstName, lastName, course FROM students;")
         return cursor.fetchall()
     
     @staticmethod
     @db_handler
     def get_by(cursor, field: str, value):
-        fields = {"id", "firstName", "lastName","course"}
+        fields = {"id", "firstName", "lastName","tuition","course"}
         
         if field not in fields:
             raise ValueError("Campo no permitido")
         
         query = f"""
-            SELECT id, firstName, lastName, tuition FROM students
+            SELECT id, firstName, lastName, course, tuition
+            FROM students
             WHERE {field} = %s;
         """
         
@@ -48,16 +49,17 @@ class Student:
         ):
         
         cursor.execute(
-            """
-                INSERT INTO students (firstName, lastName, tuiton, course)
-                VALUES(%s, %s, %s, %s);         
-            """, (firstName, lastName, tuition, course)
+            """INSERT INTO students (firstName, lastName, tuition, course)
+                VALUES(%s, %s, %s, %s);""", 
+                (firstName, lastName, tuition, course)
         )
+        
+        return cursor.lastrowid # Devuelve el ultimo id creado
         
     @staticmethod
     @db_handler
     def delete(cursor, id):
-        cursor.execute("DELETE FROM students WHERE id = %s;" (id,))
+        cursor.execute("DELETE FROM students WHERE id = %s;", (id,))
         
     @staticmethod
     @db_handler

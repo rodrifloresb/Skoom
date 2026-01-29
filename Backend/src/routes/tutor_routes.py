@@ -50,7 +50,7 @@ def post_tutor(
                  phoneNumber=phoneNumber,
                  address=address)
     
-@router.delete("/{id}")
+@router.delete("/")
 def delete_tutor(id: int):
     
     result = Tutor.get_by(field="id", value=id)
@@ -60,7 +60,7 @@ def delete_tutor(id: int):
     
     Tutor.delete(id=id)
     
-@router.put("/{id}")
+@router.put("/")
 def update_tutor(id: int, field: str, value: str):
 
     result = Tutor.get_by(field="id", value=id)

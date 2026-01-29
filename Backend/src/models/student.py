@@ -11,26 +11,31 @@ class Student:
             firstName VARCHAR(50) NOT NULL,
             lastName VARCHAR(50) NOT NULL,
             tuition INT UNIQUE,
-            course VARCHAR(50)
+            course VARCHAR(50),
+            tutor_id INT NOT NULL,
+            colegio_id INT NOT NULL,
+            
+            FOREIGN KEY (tutor_id) REFERENCES tutors(id),
+            FOREIGN KEY (colegio_id) REFERENCES colegios(id)
         );
         """)
         
     @staticmethod
     @db_handler
     def get_all(cursor):
-        cursor.execute("SELECT id, firstName, lastName, course FROM students;")
+        cursor.execute("SELECT id, firstName, lastName, course, tutor_id, colegio_id FROM students;")
         return cursor.fetchall()
     
     @staticmethod
     @db_handler
     def get_by(cursor, field: str, value):
-        fields = {"id", "firstName", "lastName","tuition","course"}
+        fields = {"id", "firstName", "lastName","tuition","course","tutor_id","colegio_id"}
         
         if field not in fields:
             raise ValueError("Campo no permitido")
         
         query = f"""
-            SELECT id, firstName, lastName, course, tuition
+            SELECT id, firstName, lastName, course, tuition, tutor_id, colegio_id
             FROM students
             WHERE {field} = %s;
         """
@@ -45,13 +50,15 @@ class Student:
         firstName,
         lastName,
         tuition,
-        course
+        course,
+        tutor_id,
+        colegio_id
         ):
         
         cursor.execute(
-            """INSERT INTO students (firstName, lastName, tuition, course)
-                VALUES(%s, %s, %s, %s);""", 
-                (firstName, lastName, tuition, course)
+            """INSERT INTO students (firstName, lastName, tuition, course, tutor_id, colegio_id)
+                VALUES(%s, %s, %s, %s, %s, %s);""", 
+                (firstName, lastName, tuition, course, tutor_id, colegio_id)
         )
         
         return cursor.lastrowid # Devuelve el ultimo id creado
@@ -65,7 +72,7 @@ class Student:
     @db_handler
     def update(cursor, id, field: str, value):
         
-        fields = {"firstName","lastName", "course"}
+        fields = {"firstName","lastName", "course", "tutor_id", "colegio_id"}
                 
         if field not in fields:
             raise ValueError("Campo no permitido")

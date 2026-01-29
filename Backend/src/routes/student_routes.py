@@ -25,7 +25,7 @@ def get_by(field:str, value):
     return result["data"]
 
 @router.post("/")
-def post_student(firstName, lastName, tuition, course):
+def post_student(firstName, lastName, tuition, course, tutor_id: int, colegio_id: int):
     
     result = Student.get_by(field="tuition", value=tuition)
 
@@ -38,7 +38,9 @@ def post_student(firstName, lastName, tuition, course):
     result_create  = Student.create(firstName=firstName,
                             lastName=lastName,
                             tuition=tuition,
-                            course=course)
+                            course=course,
+                            tutor_id=tutor_id,
+                            colegio_id=colegio_id)
     
     return result_create
     
@@ -55,7 +57,7 @@ def delete_student(id: int):
     return {"message": "Estudiante eliminado de la base de datos."}
     
 @router.put("/")
-def update_tutor(id: int, field: str, value: str):
+def update_student(id: int, field: str, value: str):
     result = Student.get_by(field="id", value=id)
 
     if not result["ok"]:
@@ -72,7 +74,7 @@ def update_tutor(id: int, field: str, value: str):
     if not update_result["ok"]:
         if update_result["error"] == "Campo no permitido":
             raise HTTPException(status_code=400, detail=update_result["error"])
-        elif update_result["error"] == "Tutor no encontrado":
+        elif update_result["error"] == "Estudiante no encontrado":
             raise HTTPException(status_code=404, detail=update_result["error"])
         else:
             raise HTTPException(status_code=500, detail="Error interno")

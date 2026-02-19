@@ -27,3 +27,36 @@ Thumbs.db
 build/
 dist/
 *.egg-info/
+
+
+# Node modules (equivalente a .venv)
+node_modules/
+
+# Vite build output
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables (frontend también usa .env)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Vite files
+.vite/
+
+# Coverage / testing
+coverage/
+
+# TypeScript (por si lo usás luego)
+*.tsbuildinfo

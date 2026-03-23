@@ -1,0 +1,465 @@
+{
+  "info": {
+    "_postman_id": "4c40a314-fae2-43fe-bbb2-049de5108a7d",
+    "name": "Skoom Request",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43469546",
+    "_collection_link": "https://go.postman.co/collection/43469546-4c40a314-fae2-43fe-bbb2-049de5108a7d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Tutors",
+      "item": [
+        {
+          "name": "all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tutors",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tutors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "tutor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tutors/by/?field=id&value=2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tutors",
+                "by",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "field",
+                  "value": "id"
+                },
+                {
+                  "key": "value",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tutors?firstName=Rodrigo&lastName=Flores&mail=Ro@gmail.com&password=123&phoneNumber=123&address=test 123",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tutors"
+              ],
+              "query": [
+                {
+                  "key": "firstName",
+                  "value": "Rodrigo",
+                  "type": "text"
+                },
+                {
+                  "key": "lastName",
+                  "value": "Flores",
+                  "type": "text"
+                },
+                {
+                  "key": "mail",
+                  "value": "Ro@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "123",
+                  "type": "text"
+                },
+                {
+                  "key": "phoneNumber",
+                  "value": "123",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "test 123",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateParam",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tutors?id=2&field=lastName&value=Bazan",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tutors"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "2"
+                },
+                {
+                  "key": "field",
+                  "value": "lastName"
+                },
+                {
+                  "key": "value",
+                  "value": "Bazan"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tutors?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tutors"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "School",
+      "item": [
+        {
+          "name": "all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/school",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "school"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "school",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/school/by?field=id&value=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "school",
+                "by"
+              ],
+              "query": [
+                {
+                  "key": "field",
+                  "value": "id"
+                },
+                {
+                  "key": "value",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/school/?name=colegio&mail=col@gmail.com&password=123&phoneNumber=123&address=Test123",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "school",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "colegio"
+                },
+                {
+                  "key": "mail",
+                  "value": "col@gmail.com"
+                },
+                {
+                  "key": "password",
+                  "value": "123"
+                },
+                {
+                  "key": "phoneNumber",
+                  "value": "123"
+                },
+                {
+                  "key": "address",
+                  "value": "Test123"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateParam",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/school/?id=1&field=name&value=test",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "school",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                },
+                {
+                  "key": "field",
+                  "value": "name"
+                },
+                {
+                  "key": "value",
+                  "value": "test"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/school?id=2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "school"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Students",
+      "item": [
+        {
+          "name": "all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/students",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "students"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "student",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/students/by/?field=id&value=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "students",
+                "by",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "field",
+                  "value": "id"
+                },
+                {
+                  "key": "value",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/students/?firstName=fernando&lastName=alonso&tuition=123&course=1A&tutor_id=2&colegio_id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "students",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "firstName",
+                  "value": "fernando"
+                },
+                {
+                  "key": "lastName",
+                  "value": "alonso"
+                },
+                {
+                  "key": "tuition",
+                  "value": "123"
+                },
+                {
+                  "key": "course",
+                  "value": "1A"
+                },
+                {
+                  "key": "tutor_id",
+                  "value": "2"
+                },
+                {
+                  "key": "colegio_id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateParam",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/students/?id&field&value",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "students",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": null,
+                  "type": "text"
+                },
+                {
+                  "key": "field",
+                  "value": null,
+                  "type": "text"
+                },
+                {
+                  "key": "value",
+                  "value": null,
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/students?id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "students"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -25,14 +25,14 @@ def get_by(field:str, value):
     return result["data"]
 
 @router.post("/")
-def post_student(firstName, lastName, tuition, course, tutor_id: int, colegio_id: int):
+def post_student(firstName, lastName, tuition, course, tutor_id: int, school_id: int):
     
-    result = Student.get_by(field="tuition", value=tuition)
-
+    result = Student.exists(tuition=tuition, school_id=school_id)
+    print(result)
     if not result["ok"]:
         raise HTTPException(status_code=500, detail=result["error"])
 
-    if result["data"] != []:
+    if result["data"]:
         raise HTTPException(status_code=409, detail="Numero de matricula no disponible")
     
     result_create  = Student.create(firstName=firstName,
@@ -40,7 +40,7 @@ def post_student(firstName, lastName, tuition, course, tutor_id: int, colegio_id
                             tuition=tuition,
                             course=course,
                             tutor_id=tutor_id,
-                            colegio_id=colegio_id)
+                            school_id=school_id)
     
     return result_create
     

@@ -6,6 +6,7 @@ from models.student import Student
 from routes.school_routes import router as school_routes
 from routes.tutor_routes import router as tutor_router
 from routes.student_routes import router as student_router
+from services.validAccount import router as validAccount
 from config.database import get_connection
 from config.seed import seed_database
 
@@ -35,6 +36,7 @@ app.add_middleware(
 app.include_router(tutor_router, prefix="/tutors", tags=["Tutors"])
 app.include_router(school_routes, prefix="/school", tags = ["Schools"])
 app.include_router(student_router, prefix="/students", tags= ["Students"])
+app.include_router(validAccount, prefix="/valid", tags=["ValidAccount"])
 
 @app.get("/")
 def health():

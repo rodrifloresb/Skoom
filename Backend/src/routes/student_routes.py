@@ -7,22 +7,23 @@ router = APIRouter()
 def get_students():
     return Student.get_all()
 
-@router.get("/by")
-def get_by(field:str, value):
+# # PROBLEMA DE SEGURIDAD
+# @router.get("/by")
+# def get_by(field:str, value):
     
-    result = Student.get_by(field=field,value=value)
+#     result = Student.get_by(field=field,value=value)
     
-    if not result["ok"]:
-        if "Campo no permitido" in result["error"]:
-            raise HTTPException(status_code=400, detail=result["error"])
-        else:
-            raise HTTPException(status_code=500, detail="Error interno")
+#     if not result["ok"]:
+#         if "Campo no permitido" in result["error"]:
+#             raise HTTPException(status_code=400, detail=result["error"])
+#         else:
+#             raise HTTPException(status_code=500, detail="Error interno")
 
 
-    if result["data"] == []:
-        raise HTTPException(status_code=404, detail="No existe estudiante")
+#     if result["data"] == []:
+#         raise HTTPException(status_code=404, detail="No existe estudiante")
 
-    return result
+#     return result
 
 @router.post("/")
 def post_student(firstName, lastName, tuition, course, tutor_id: int, school_id: int):

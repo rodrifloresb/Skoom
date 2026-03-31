@@ -32,7 +32,7 @@ class School:
             raise ValueError("Campo no permitido")
 
         query = f"""
-            SELECT id, name, mail, phoneNumber, address
+            SELECT *
             FROM schools
             WHERE {field} = %s;
         """

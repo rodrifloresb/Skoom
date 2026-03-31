@@ -7,21 +7,23 @@ router = APIRouter()
 def get_schools():
     return School.get_all()
 
-@router.get("/by")
-def get_by(field: str, value: str):
 
-    result = School.get_by(field=field, value=value)
+# # PROBLEMA DE SEGURIDAD
+# @router.get("/by")
+# def get_by(field: str, value: str):
 
-    if not result["ok"]:
-        if "Campo no permitido" in result["error"]:
-            raise HTTPException(status_code=400, detail=result["error"])
-        else:
-            raise HTTPException(status_code=500, detail="Error interno")
+#     result = School.get_by(field=field, value=value)
 
-    if result["data"] == []:
-        raise HTTPException(status_code=404, detail="No existe school")
+#     if not result["ok"]:
+#         if "Campo no permitido" in result["error"]:
+#             raise HTTPException(status_code=400, detail=result["error"])
+#         else:
+#             raise HTTPException(status_code=500, detail="Error interno")
 
-    return result
+#     if result["data"] == []:
+#         raise HTTPException(status_code=404, detail="No existe school")
+
+#     return result
 
 @router.post("/")
 def post_school(name: str, mail: str, password: str, phoneNumber: str, address: str):

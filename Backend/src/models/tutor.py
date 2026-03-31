@@ -35,7 +35,7 @@ class Tutor:
             raise ValueError("Campo no permitido")
 
         query = f"""
-            SELECT id, firstName, lastName, mail, phoneNumber, address
+            SELECT *
             FROM tutors
             WHERE {field} = %s;
         """

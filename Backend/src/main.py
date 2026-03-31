@@ -6,6 +6,7 @@ from routes.school_routes import router as school_routes
 from routes.tutor_routes import router as tutor_router
 from routes.student_routes import router as student_router
 from config.database import get_connection
+from config.seed import seed_database
 
 # Conexion a la BD
 get_connection()
@@ -14,6 +15,10 @@ get_connection()
 Tutor.create_table()
 School.create_table()
 Student.create_table()
+
+# SEED
+
+seed_database()
 
 # ROUTERS
 app = FastAPI()

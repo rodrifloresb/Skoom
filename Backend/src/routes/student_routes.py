@@ -22,17 +22,18 @@ def get_by(field:str, value):
     if result["data"] == []:
         raise HTTPException(status_code=404, detail="No existe estudiante")
 
-    return result["data"]
+    return result
 
 @router.post("/")
 def post_student(firstName, lastName, tuition, course, tutor_id: int, school_id: int):
     
     result = Student.exists(tuition=tuition, school_id=school_id)
+    
     print(result)
     if not result["ok"]:
         raise HTTPException(status_code=500, detail=result["error"])
 
-    if result["data"]:
+    if result["data"] != None:
         raise HTTPException(status_code=409, detail="Numero de matricula no disponible")
     
     result_create  = Student.create(firstName=firstName,
@@ -52,9 +53,9 @@ def delete_student(id: int):
     if result["data"] == []:
         raise HTTPException(status_code=404, detail="No existe estudiante con este id")
     
-    Student.delete(id=id)
+    result = Student.delete(id=id)
     
-    return {"message": "Estudiante eliminado de la base de datos."}
+    return result
     
 @router.put("/")
 def update_student(id: int, field: str, value: str):
@@ -79,4 +80,4 @@ def update_student(id: int, field: str, value: str):
         else:
             raise HTTPException(status_code=500, detail="Error interno")
 
-    return {"message": "Estudiante actualizado correctamente"}
+    return update_result

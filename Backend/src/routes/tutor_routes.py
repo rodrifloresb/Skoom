@@ -22,7 +22,7 @@ def get_by(field: str, value: str):
     if result["data"] == []:
         raise HTTPException(status_code=404, detail="No existe tutor")
 
-    return result["data"]
+    return result
 
 
 @router.post("/")
@@ -43,12 +43,15 @@ def post_tutor(
     if result["data"] != []:
         raise HTTPException(status_code=409, detail="Este mail ya fue registrado")
     
-    Tutor.create(firstName=firstName,
-                 lastName=lastName,
-                 mail=mail,
-                 password=password,
-                 phoneNumber=phoneNumber,
-                 address=address)
+    result =    Tutor.create(firstName=firstName,
+                    lastName=lastName,
+                    mail=mail,
+                    password=password,
+                    phoneNumber=phoneNumber,
+                    address=address)
+    
+    return result
+    
     
 @router.delete("/")
 def delete_tutor(id: int):
@@ -58,7 +61,9 @@ def delete_tutor(id: int):
     if result["data"] == []:
         raise HTTPException(status_code=404, detail="No existe tutor con este id")
     
-    Tutor.delete(id=id)
+    result = Tutor.delete(id=id)
+    
+    return result
     
 @router.put("/")
 def update_tutor(id: int, field: str, value: str):
@@ -84,4 +89,4 @@ def update_tutor(id: int, field: str, value: str):
         else:
             raise HTTPException(status_code=500, detail="Error interno")
 
-    return {"message": "Tutor actualizado correctamente"}
+    return update_result

@@ -49,7 +49,7 @@ class School:
             (name, mail, password, phoneNumber, address)
         )
 
-        return cursor.lastrowid
+        return cursor.fetchall()
 
     @staticmethod
     @db_handler
@@ -68,3 +68,5 @@ class School:
 
         if cursor.rowcount == 0:
             raise ValueError("School no encontrado")
+        
+        return cursor.fetchall()

@@ -21,7 +21,7 @@ def get_by(field: str, value: str):
     if result["data"] == []:
         raise HTTPException(status_code=404, detail="No existe school")
 
-    return result["data"]
+    return result
 
 @router.post("/")
 def post_school(name: str, mail: str, password: str, phoneNumber: str, address: str):
@@ -55,9 +55,9 @@ def delete_school(id: int):
     if result["data"] == []:
         raise HTTPException(status_code=404, detail="No existe school con este id")
 
-    School.delete(id=id)
+    result = School.delete(id=id)
 
-    return {"message": "School eliminado de la base de datos."}
+    return result
 
 @router.put("/")
 def update_school(id: int, field: str, value: str):
@@ -83,4 +83,4 @@ def update_school(id: int, field: str, value: str):
         else:
             raise HTTPException(status_code=500, detail="Error interno")
 
-    return {"message": "School actualizado correctamente"}
+    return update_result

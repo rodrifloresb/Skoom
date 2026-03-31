@@ -41,6 +41,7 @@ class Tutor:
         """
 
         cursor.execute(query, (value,))
+        
         return cursor.fetchall()
 
         
@@ -60,12 +61,16 @@ class Tutor:
             """INSERT INTO tutors (firstName, lastName, mail, password, phoneNumber, address) 
             VALUES (%s, %s, %s, %s, %s, %s);""",
             (firstName, lastName, mail, password, phoneNumber, address)
-        )
+       )
     
+        return cursor.fetchall()
+        
     @staticmethod
     @db_handler
     def delete(cursor, id):
         cursor.execute("DELETE FROM tutors WHERE id = %s;", (id,))
+        
+        return cursor.fetchall()
         
     @staticmethod
     @db_handler
@@ -81,3 +86,5 @@ class Tutor:
 
         if cursor.rowcount == 0:
             raise ValueError("Tutor no encontrado")
+        
+        return cursor.fetchall()

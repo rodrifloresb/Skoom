@@ -6,10 +6,6 @@ class Student:
     @db_handler
     def create_table(cursor):
         
-        # --- tuition (matricula) deberia de ser unica
-        # --- solo cuando ya se encuentra registrada
-        # --- para ese colegio (school_id)
-        
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS students(
             id INT PRIMARY KEY AUTO_INCREMENT,
@@ -69,12 +65,14 @@ class Student:
                 (firstName, lastName, tuition, course, tutor_id, school_id)
         )
         
-        return cursor.lastrowid # Devuelve el ultimo id creado
+        return cursor.fetchall()
         
     @staticmethod
     @db_handler
     def delete(cursor, id):
         cursor.execute("DELETE FROM students WHERE id = %s;", (id,))
+        
+        return cursor.fetchall()
         
     @staticmethod
     @db_handler
@@ -90,6 +88,8 @@ class Student:
 
         if cursor.rowcount == 0:
             raise ValueError("Estudiante no encontrado")
+        
+        return cursor.fetchall()
     
     @staticmethod
     @db_handler

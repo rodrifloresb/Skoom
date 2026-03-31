@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from models.tutor import Tutor
 from models.school import School
 from models.student import Student
@@ -22,6 +23,14 @@ seed_database()
 
 # ROUTERS
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5500"],  # mejor que "*"
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(tutor_router, prefix="/tutors", tags=["Tutors"])
 app.include_router(school_routes, prefix="/school", tags = ["Schools"])

@@ -39,3 +39,10 @@ INSERT IGNORE INTO students (firstName, lastName, tuition, course, tutor_id, sch
 
 -- Colegio 5
 ('Mateo', 'Fernandez', 100, '2A', 5, 5);
+
+-- ======================
+-- RESET AUTO_INCREMENT
+-- ======================
+ALTER TABLE schools AUTO_INCREMENT = 6;
+ALTER TABLE tutors AUTO_INCREMENT = 6;
+ALTER TABLE students AUTO_INCREMENT = 9;

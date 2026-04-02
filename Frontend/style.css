@@ -1,3 +1,4 @@
+/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -5,44 +6,79 @@
 }
 
 body {
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* LAYOUT PRINCIPAL */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* IZQUIERDA (imagen) */
+.left {
+    width: 50%;
+    background: #F5F7FA;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+}
+
+.left img {
+    width: 60%;
+}
+
+/* DERECHA (login) */
+.right {
+    width: 50%;
+    background: linear-gradient(135deg, #6D40FF, #8C6BFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* FORM */
 form {
-    background-color: #203f6e;
-    padding: 25px;
+    background: #FFFFFF;
+    padding: 30px;
+    border-radius: 12px;
+    width: 280px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     display: flex;
     flex-direction: column;
-    border-radius: 8px;
-    width: 260px;
 }
 
 /* LABELS */
 form label {
-    color: white;
+    color: #1F1F1F;
     margin-bottom: 5px;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 /* INPUTS */
 form input[type="email"],
 form input[type="text"] {
     padding: 10px;
-    margin-bottom: 12px;
-    border-radius: 5px;
-    border: none;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #E4E7EC;
+    outline: none;
+    transition: 0.2s;
 }
 
-/* --- SWITCH (RADIO) --- */
+form input:focus {
+    border-color: #6D40FF;
+    box-shadow: 0 0 0 2px rgba(109, 64, 255, 0.2);
+}
+
+/* SWITCH */
 .account-type {
     display: flex;
-    background-color: #162c4d;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    background-color: #E4E7EC;
+    border-radius: 8px;
+    margin-bottom: 20px;
     overflow: hidden;
 }
 
@@ -55,31 +91,54 @@ form input[type="text"] {
     text-align: center;
     padding: 10px;
     cursor: pointer;
-    color: white;
+    color: #555;
     transition: 0.3s;
 }
 
-/* seleccionado */
 .account-type input:checked + label {
-    background-color: #4da3ff;
-    color: #000;
+    background-color: #6D40FF;
+    color: white;
     font-weight: bold;
 }
 
-/* hover */
 .account-type label:hover {
-    background-color: #355a8a;
+    background-color: #d6d9df;
 }
 
 /* BUTTON */
 button {
     padding: 10px;
     border: none;
-    border-radius: 5px;
-    transition: .3s ease;
+    border-radius: 6px;
     cursor: pointer;
+    background-color: #6D40FF;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    font-weight: 600;
 }
 
 button:hover {
-    background-color: #ccc;
+    background-color: #4B2FCC;
+}
+
+/* REGISTER */
+
+.register-text {
+    margin-top: 15px;
+    font-size: 13px;
+    text-align: center;
+    color: #555;
+    font-weight: 400;
+}
+
+.register-text a {
+    color: #6D40FF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
 }
